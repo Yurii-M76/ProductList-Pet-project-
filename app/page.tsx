@@ -1,12 +1,10 @@
-import styles from "./page.module.css";
+import ProductList from "./products/page";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <h1>Home</h1>
-      </main>
-      <footer className={styles.footer}></footer>
-    </div>
+    <>
+      <h1>Главная</h1>
+      <ProductList />
+    </>
   );
 }
