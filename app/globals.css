@@ -17,14 +17,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
+.siteName {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
 .page {
   display: grid;
-  grid-template-rows: 80px 1fr 100px;
+  grid-template-rows: 80px 1fr 140px;
   justify-items: flex-start;
   gap: 30px;
   min-height: 100svh;
