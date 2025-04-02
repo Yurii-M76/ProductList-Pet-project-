@@ -18,18 +18,20 @@ const ActionIcon: FC<TActionIcon> = ({
   children,
   onClick,
 }) => {
+  const classNames = [
+    classes.actionIcon,
+    variant === "outline" && classes.outline,
+    variant === "transparent" && classes.transparent,
+    size === "sm" && classes.sm,
+    size === "md" && classes.md,
+    size === "lg" && classes.lg,
+    color === "blue" && classes.colorBlue,
+    color === "red" && classes.colorRed,
+  ].filter(Boolean).join(" ");
+
   return (
     <div
-      className={`
-        ${classes.actionIcon}
-        ${variant === "outline" && classes.outline}
-        ${variant === "transparent" && classes.transparent}
-        ${size === "sm" && classes.sm}
-        ${size === "md" && classes.md}
-        ${size === "lg" && classes.lg}
-        ${color === "blue" && classes.colorBlue}
-        ${color === "red" && classes.colorRed}
-      `}
+      className={classNames}
       style={style}
       onClick={onClick}
     >
