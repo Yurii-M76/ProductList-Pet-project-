@@ -1,8 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import ActionIcon from "../ui/ActionIcon/ActionIcon";
-import TrashIcon from "../ui/icons/TrashIcon";
-import LikeIcon from "../ui/icons/LikeIcon";
+import { ActionIcon, LikeIcon, TrashIcon } from "../ui";
 import classes from "./product-card.module.css";
 
 type TProductCard = {
@@ -36,6 +34,7 @@ const ProductCard: FC<TProductCard> = ({
           height={300}
           unoptimized
           className={classes.image}
+          loading="lazy"
         />
         <div className={classes.delete}>
           <ActionIcon variant="outline" size="sm">
