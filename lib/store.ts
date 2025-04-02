@@ -4,7 +4,7 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook,
 } from "react-redux";
-import productsSlice from "./features/products/postsSlice";
+import productsSlice from "./features/products/productsSlice";
 
 export const rootReducer = combineReducers({
   [productsSlice.reducerPath]: productsSlice.reducer,
