@@ -1,26 +1,43 @@
-"use client";
+import { Metadata } from "next";
+import Link from "next/link";
+import { fetchProducts } from "@/lib/api";
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { getAllProducts } from "@/lib/features/products/postsSlice";
-import { useSelector } from "@/lib/store";
+import { TProduct } from "@/types/product.types";
 import classes from "./products.module.css";
 
-const ProductList = () => {
-  const { items } = useSelector(getAllProducts);
+const getData = async () => {
+  return await fetchProducts<TProduct[]>();
+}
 
-  const products = items.map((item) => {
+export const metadata: Metadata = {
+  title: "Products | SiteName",
+  description: "All Products",
+};
+
+const ProductList = async () => {
+  const products = await getData();
+
+  const items = products.map((item) => {
     return (
-      <ProductCard
-        key={item.id}
-        category={item.category}
-        image={item.image}
-        title={item.title}
-        description={item.description}
-        price={item.price}
-      />
+      <Link href={`/products/${item.id}`} key={item.id}>
+        <ProductCard
+          key={item.id}
+          category={item.category}
+          image={item.image}
+          title={item.title}
+          description={item.description}
+          price={item.price}
+        />
+      </Link>
     );
   });
 
-  return <div className={classes.products}>{products}</div>;
+  return (
+    <>
+      <h1>Все продукты</h1>
+      <div className={classes.products}>{items}</div>
+    </>
+  );
 };
 
 export default ProductList;
