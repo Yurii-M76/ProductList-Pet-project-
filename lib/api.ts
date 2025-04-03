@@ -10,6 +10,27 @@ export const fetchProducts = async <T>(): Promise<T> => {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       } as HeadersInit,
+      next: {
+        revalidate: 60,
+      },
+    });
+    return await checkResponse<T>(response);
+  } catch (error) {
+    console.error(`Request failed (get products):`, error);
+    return Promise.reject(error);
+  }
+};
+
+export const fetchProduct = async <T>(id: string): Promise<T> => {
+  try {
+    const response = await fetch(`${URL}/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      } as HeadersInit,
+      next: {
+        revalidate: 60,
+      },
     });
     return await checkResponse<T>(response);
   } catch (error) {
