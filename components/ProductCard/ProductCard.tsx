@@ -22,7 +22,6 @@ const ProductCard: FC<TProductCard> = ({
   title,
   description,
   price,
-  isLike,
 }) => {
   return (
     <div className={classes.card}>
