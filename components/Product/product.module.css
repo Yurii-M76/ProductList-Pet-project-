@@ -44,6 +44,10 @@
   inline-size: 100%;
 }
 
+.like {
+  color: #d2d2d2;
+}
+
 .description {
   font-size: 1.1rem;
   line-height: 1.6;

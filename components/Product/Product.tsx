@@ -1,5 +1,11 @@
+"use client";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, SyntheticEvent } from "react";
+import { useDispatch, useSelector } from "@/lib/store";
+import {
+  getFavorites,
+  setFavorites,
+} from "@/lib/features/products/productsSlice";
 import { ActionIcon, LikeIcon } from "../ui";
 import { TProduct } from "@/types/product.types";
 import classes from "./product.module.css";
@@ -9,7 +15,16 @@ type Props = {
 };
 
 const Product: FC<Props> = ({ data }) => {
-  const { image, title, description, category, price } = data;
+  const { id, image, title, description, category, price } = data;
+  const dispatch = useDispatch();
+  const favorites = useSelector(getFavorites);
+  const isLike = favorites.includes(id);
+
+  const likeHandler = (evt: SyntheticEvent) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+    dispatch(setFavorites(id));
+  };
 
   return (
     <div className={classes.product}>
@@ -31,9 +46,16 @@ const Product: FC<Props> = ({ data }) => {
       <div className={classes.productInfo}>
         <div className={classes.titleWrapper}>
           <h1>{title}</h1>
-          <ActionIcon variant="transparent" size="lg">
-            <LikeIcon />
-          </ActionIcon>
+          <span className={classes.like}>
+            <ActionIcon
+              variant="transparent"
+              size="lg"
+              onClick={likeHandler}
+              style={isLike ? { color: "red" } : undefined}
+            >
+              <LikeIcon />
+            </ActionIcon>
+          </span>
         </div>
         <span className={classes.category}>{category}</span>
         <p className={classes.description}>
