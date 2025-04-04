@@ -34,7 +34,7 @@
   gap: 20px;
 }
 
-.titleWrapper {
+.options {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -44,8 +44,13 @@
   inline-size: 100%;
 }
 
-.like {
-  color: #d2d2d2;
+.actionIcon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  color: #979797;
 }
 
 .description {

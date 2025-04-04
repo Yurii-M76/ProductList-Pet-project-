@@ -6,7 +6,7 @@ import {
   getFavorites,
   setFavorites,
 } from "@/lib/features/products/productsSlice";
-import { ActionIcon, LikeIcon } from "../ui";
+import { ActionIcon, EditIcon, LikeIcon, TrashIcon } from "../ui";
 import { TProduct } from "@/types/product.types";
 import classes from "./product.module.css";
 
@@ -44,20 +44,27 @@ const Product: FC<Props> = ({ data }) => {
       </div>
 
       <div className={classes.productInfo}>
-        <div className={classes.titleWrapper}>
-          <h1>{title}</h1>
-          <span className={classes.like}>
+        <h1>{title}</h1>
+        <div className={classes.options}>
+          <span className={classes.category}>{category}</span>
+          <div className={classes.actionIcon}>
+            <ActionIcon variant="transparent" size="md">
+              <EditIcon />
+            </ActionIcon>
+            <ActionIcon variant="transparent" size="md">
+              <TrashIcon />
+            </ActionIcon>
             <ActionIcon
               variant="transparent"
-              size="lg"
+              size="md"
               onClick={likeHandler}
               style={isLike ? { color: "red" } : undefined}
             >
               <LikeIcon />
             </ActionIcon>
-          </span>
+          </div>
         </div>
-        <span className={classes.category}>{category}</span>
+
         <p className={classes.description}>
           <strong>Description:</strong> {description}
         </p>
