@@ -1,46 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts } from "./actions";
-import { TProduct } from "@/types/product.types";
-import { fetchProducts } from "@/lib/api";
 
 type TInitialState = {
   loading: boolean;
   error?: string | null;
-  items: TProduct[];
+  favorites: string[];
 };
-
-const initialItems = await fetchProducts<TProduct[]>();
 
 const initialState: TInitialState = {
   loading: false,
   error: null,
-  items: initialItems || [],
+  favorites: [],
 };
 
 export const productsSlice = createSlice({
   name: "productsSlice",
   initialState,
-  reducers: {},
-  selectors: {
-    getAllProducts: (state) => state,
+  reducers: {
+    setFavorites: (state, action) => {
+      if (state.favorites.includes(action.payload)) {
+        state.favorites = state.favorites.filter((id) => id !== action.payload);
+      } else {
+        state.favorites = [...state.favorites, action.payload];
+      }
+    },
   },
-  extraReducers(builder) {
-    builder
-      .addCase(getProducts.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getProducts.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.items = action.payload;
-      })
-      .addCase(getProducts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
+  selectors: {
+    getFavorites: (state) => state.favorites,
   },
 });
 
-export const { getAllProducts } = productsSlice.selectors;
+export const { setFavorites } = productsSlice.actions;
+export const { getFavorites } = productsSlice.selectors;
 export default productsSlice;
