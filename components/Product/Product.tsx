@@ -1,39 +1,45 @@
-"use client";
 import Image from "next/image";
-import { FC, useEffect } from "react";
-import { useDispatch } from "@/lib/store";
-import { setProduct } from "@/lib/features/products/productsSlice";
+import { FC } from "react";
+import { ActionIcon, LikeIcon } from "../ui";
 import { TProduct } from "@/types/product.types";
+import classes from "./product.module.css";
 
 type Props = {
   data: TProduct;
 };
 
 const Product: FC<Props> = ({ data }) => {
-  const dispatch = useDispatch();
   const { image, title, description, category, price } = data;
 
-  useEffect(() => {
-    dispatch(setProduct(data));
-  }, [data, dispatch]);
-
   return (
-    <div className="product">
-      {image && (
-        <Image
-          src={image}
-          alt={title ? title : "image"}
-          width={420}
-          height={320}
-          unoptimized
-        />
-      )}
+    <div className={classes.product}>
+      <div className={classes.image}>
+        {image && (
+          <Image
+            src={image}
+            blurDataURL={image}
+            alt={title ? title : "image"}
+            width={200}
+            height={200}
+            unoptimized
+            layout="responsive"
+            className={classes.img}
+          />
+        )}
+      </div>
 
-      <div className="product-info">
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <p>Category: {category}</p>
-        <p>Price: ${price}</p>
+      <div className={classes.productInfo}>
+        <div className={classes.titleWrapper}>
+          <h1>{title}</h1>
+          <ActionIcon variant="transparent" size="lg">
+            <LikeIcon />
+          </ActionIcon>
+        </div>
+        <span className={classes.category}>{category}</span>
+        <p className={classes.description}>
+          <strong>Description:</strong> {description}
+        </p>
+        <p className={classes.price}>${price}</p>
       </div>
     </div>
   );
