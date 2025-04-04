@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, SyntheticEvent } from "react";
 import classes from "./actionIcon.module.css";
 
 type TActionIcon = {
@@ -7,7 +7,7 @@ type TActionIcon = {
   color?: "blue" | "red";
   style?: object | undefined;
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: SyntheticEvent) => void;
 };
 
 const ActionIcon: FC<TActionIcon> = ({
