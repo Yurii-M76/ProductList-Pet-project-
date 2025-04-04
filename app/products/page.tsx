@@ -5,9 +5,9 @@ import ProductCard from "@/components/ProductCard/ProductCard";
 import { TProduct } from "@/types/product.types";
 import classes from "./products.module.css";
 
-const getData = async () => {
+const getData = async (): Promise<TProduct[]> => {
   return await fetchProducts<TProduct[]>();
-}
+};
 
 export const metadata: Metadata = {
   title: "Products | SiteName",
@@ -21,6 +21,7 @@ const ProductList = async () => {
     return (
       <Link href={`/products/${item.id}`} key={item.id}>
         <ProductCard
+          id={item.id}
           key={item.id}
           category={item.category}
           image={item.image}
