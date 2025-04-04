@@ -41,22 +41,10 @@ a {
   justify-items: flex-start;
   gap: 30px;
   min-height: 100svh;
-  padding: 0 60px;
+  padding: 0 20px;
 
-  @media (max-width: 1440px) {
-    padding: 0 40px;
-  }
-
-  @media (max-width: 1024px) {
-    padding: 0 30px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
-
-  @media (max-width: 375px) {
-    padding: 0 10px;
+  @media (min-width: 660px) {
+    padding: 0 60px;
   }
 }
 
