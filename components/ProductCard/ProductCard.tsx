@@ -1,21 +1,16 @@
 "use client";
 import { FC, SyntheticEvent } from "react";
 import Image from "next/image";
-import { useDispatch, useSelector } from "@/lib/store";
-import {
-  getFavorites,
-  setFavorites,
-} from "@/lib/features/products/productsSlice";
 import { ActionIcon, LikeIcon, TrashIcon } from "../ui";
 import classes from "./product-card.module.css";
+import { TProduct } from "@/types/product.types";
 
 type TProductCard = {
-  id: string;
-  image: string;
-  category: string;
-  title: string;
-  description: string;
-  price: number;
+  product: TProduct;
+  isLike: boolean;
+  toggleLike: (event: SyntheticEvent, id: string) => void;
+  onDelete: (event: SyntheticEvent, id: string) => void;
+  onEdit?: (event: SyntheticEvent, id: string) => void;
 };
 
 const crop = (str: string, limit: number): string => {
@@ -23,22 +18,12 @@ const crop = (str: string, limit: number): string => {
 };
 
 const ProductCard: FC<TProductCard> = ({
-  id,
-  image,
-  category,
-  title,
-  description,
-  price,
+  isLike,
+  product,
+  toggleLike,
+  onDelete,
 }) => {
-  const dispatch = useDispatch();
-  const favorites = useSelector(getFavorites);
-  const isLike = favorites.includes(id);
-
-  const likeHandler = (evt: SyntheticEvent) => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    dispatch(setFavorites(id));
-  };
+  const { id, image, title, description, category, price } = product;
 
   return (
     <div className={classes.card}>
@@ -53,7 +38,11 @@ const ProductCard: FC<TProductCard> = ({
           loading="lazy"
         />
         <div className={classes.delete}>
-          <ActionIcon variant="outline" size="md">
+          <ActionIcon
+            variant="outline"
+            size="md"
+            onClick={(evt: SyntheticEvent) => onDelete(evt, id)}
+          >
             <TrashIcon />
           </ActionIcon>
         </div>
@@ -67,7 +56,7 @@ const ProductCard: FC<TProductCard> = ({
               <ActionIcon
                 variant="transparent"
                 size="sm"
-                onClick={likeHandler}
+                onClick={(evt: SyntheticEvent) => toggleLike(evt, id)}
                 style={isLike ? { color: "red" } : undefined}
               >
                 <LikeIcon />
