@@ -1,7 +1,6 @@
 import { Metadata } from "next";
-import { fetchProduct } from "@/lib/api";
+import { fetchProduct } from "@/lib/features/products/products.api";
 import Product from "@/components/Product/Product";
-import { TProduct } from "@/types/product.types";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -9,7 +8,7 @@ type Props = {
 };
 
 const getData = async (id: string) => {
-  return await fetchProduct<TProduct>(id);
+  return await fetchProduct(id);
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
