@@ -1,5 +1,5 @@
-import ProductList from "./products/page";
+import ProductsPage from "./products/page";
 
 export default function Home() {
-  return <ProductList />;
+  return <ProductsPage />;
 }
