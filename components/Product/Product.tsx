@@ -4,7 +4,7 @@ import { FC, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "@/lib/store";
 import {
   getFavorites,
-  setFavorites,
+  toggleFavorite,
 } from "@/lib/features/products/productsSlice";
 import { ActionIcon, EditIcon, LikeIcon, TrashIcon } from "../ui";
 import { TProduct } from "@/types/product.types";
@@ -23,7 +23,7 @@ const Product: FC<Props> = ({ data }) => {
   const likeHandler = (evt: SyntheticEvent) => {
     evt.preventDefault();
     evt.stopPropagation();
-    dispatch(setFavorites(id));
+    dispatch(toggleFavorite(id));
   };
 
   return (
