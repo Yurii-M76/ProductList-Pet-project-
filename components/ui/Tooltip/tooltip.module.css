@@ -1,0 +1,38 @@
+.tooltipBtn {
+  position: relative;
+}
+
+.label {
+  border-radius: 4px;
+  padding: 6px 10px;
+  box-shadow: 0 0 16px rgba(100, 100, 100, 0.4);
+  color: white;
+  font-size: 0.8rem;
+  background-color: black;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  z-index: 1;
+  visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  opacity: 0;
+  text-align: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transform: translateX(-50%);
+  white-space: pre-wrap;
+  inline-size: 180px;
+
+  @media(max-width: 426px) {
+    inline-size: 100px;
+  }
+}
+
+.tooltipBtn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
