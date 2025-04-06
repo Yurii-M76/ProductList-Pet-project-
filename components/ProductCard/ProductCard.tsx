@@ -1,7 +1,7 @@
 "use client";
 import { FC, SyntheticEvent } from "react";
 import Image from "next/image";
-import { ActionIcon, LikeIcon, TrashIcon } from "../ui";
+import { ActionIcon, LikeIcon, Tooltip, TrashIcon } from "../ui";
 import classes from "./product-card.module.css";
 import { TProduct } from "@/types/product.types";
 
@@ -38,13 +38,15 @@ const ProductCard: FC<TProductCard> = ({
           loading="lazy"
         />
         <div className={classes.delete}>
-          <ActionIcon
-            variant="outline"
-            size="md"
-            onClick={(evt: SyntheticEvent) => onDelete(evt, id)}
-          >
-            <TrashIcon />
-          </ActionIcon>
+          <Tooltip label="Удалить">
+            <ActionIcon
+              variant="outline"
+              size="md"
+              onClick={(evt: SyntheticEvent) => onDelete(evt, id)}
+            >
+              <TrashIcon />
+            </ActionIcon>
+          </Tooltip>
         </div>
         <div className={classes.category}>{category}</div>
       </div>
@@ -53,14 +55,20 @@ const ProductCard: FC<TProductCard> = ({
           <div className={classes.titleWrapper}>
             <h2 className={classes.title}>{crop(title, 30)}</h2>
             <span className={classes.like}>
-              <ActionIcon
-                variant="transparent"
-                size="sm"
-                onClick={(evt: SyntheticEvent) => toggleLike(evt, id)}
-                style={isLike ? { color: "red" } : undefined}
+              <Tooltip
+                label={
+                  !isLike ? "Добавить в избранное" : "Удалить из избранного"
+                }
               >
-                <LikeIcon />
-              </ActionIcon>
+                <ActionIcon
+                  variant="transparent"
+                  size="sm"
+                  onClick={(evt: SyntheticEvent) => toggleLike(evt, id)}
+                  style={isLike ? { color: "red" } : undefined}
+                >
+                  <LikeIcon />
+                </ActionIcon>
+              </Tooltip>
             </span>
           </div>
           <p className={classes.description}>{crop(description, 150)}</p>
