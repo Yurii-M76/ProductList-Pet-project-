@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FC, SyntheticEvent, useEffect } from "react";
+import { deleteProductFromApi } from "@/lib/features/products/products.api";
 import { useDispatch, useSelector } from "@/lib/store";
 import {
   deleteProduct,
@@ -8,9 +9,10 @@ import {
   toggleFavorite,
 } from "@/lib/features/products/productsSlice";
 import ProductCard from "../ProductCard/ProductCard";
+import { ActionIcon, Tooltip } from "../ui";
+import AddIcon from "../ui/icons/AddIcon";
 import { TProduct } from "@/types/product.types";
 import classes from "./products.module.css";
-import { deleteProductFromApi } from "@/lib/features/products/products.api";
 
 type Props = {
   products: TProduct[];
@@ -68,7 +70,14 @@ const Products: FC<Props> = ({ products }) => {
 
   return (
     <>
-      <h1>Все продукты</h1>
+      <div className={classes.header}>
+        <h1>Все продукты</h1>
+        <Tooltip label="Добавить товар">
+          <ActionIcon variant="outline" size="md" color="blue">
+            <AddIcon />
+          </ActionIcon>
+        </Tooltip>
+      </div>
       <div className={classes.products}>
         {!products.length
           ? "Products not found"
