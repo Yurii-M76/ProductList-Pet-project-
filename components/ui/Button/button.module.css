@@ -1,0 +1,19 @@
+.button {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 8px 14px;
+  color: white;
+  background-color: rgba(75, 129, 244, 1);
+  inline-size: fit-content;
+  font-size: 0.9rem;
+}
+
+.button:hover {
+  background-color: rgba(75, 129, 244, 0.75);
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: rgba(75, 129, 244, 0.85);
+  transform: translateY(3%);
+}
