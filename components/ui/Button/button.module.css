@@ -1,19 +1,83 @@
 .button {
   border: 1px solid transparent;
   border-radius: 4px;
-  padding: 8px 14px;
-  color: white;
-  background-color: rgba(75, 129, 244, 1);
-  inline-size: fit-content;
-  font-size: 0.9rem;
+  background-color: transparent;
 }
 
 .button:hover {
-  background-color: rgba(75, 129, 244, 0.75);
   cursor: pointer;
 }
 
 .button:active {
-  background-color: rgba(75, 129, 244, 0.85);
   transform: translateY(3%);
+}
+
+/* VARIANTS */
+
+.default {
+  border: 1px solid #ddd;
+  color: rgba(134, 142, 150, 1);
+  background-color: white;
+}
+
+.default:hover {
+  background-color: rgb(247, 247, 247);
+}
+
+.filled {
+  color: white;
+  background-color: rgba(34, 139, 230, 1);
+}
+
+.filled:hover {
+  background-color: rgba(34, 139, 230, 0.8);
+}
+
+.transparent {
+  color: rgba(134, 142, 150, 1);
+}
+
+.transparent:hover {
+  text-decoration: underline;
+}
+
+/* COLORS */
+
+.red {
+  background-color: rgba(224, 0, 0, 1);
+}
+
+.red:hover {
+  background-color: rgba(224, 0, 0, 0.8);
+}
+
+.green {
+  background-color: rgba(64, 192, 87, 1);
+}
+
+.green:hover {
+  background-color: rgba(64, 192, 87, 0.8);
+}
+
+.grape {
+  background-color: rgba(190, 75, 219, 1);
+}
+
+.grape:hover {
+  background-color: rgba(190, 75, 219, 0.8);
+}
+
+.sm {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+.md {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.lg {
+  padding: 10px 14px;
+  font-size: 1rem;
 }
