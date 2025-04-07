@@ -2,12 +2,13 @@
 import { FC, SyntheticEvent } from "react";
 import Image from "next/image";
 import { ActionIcon, LikeIcon, Tooltip, TrashIcon } from "../ui";
-import classes from "./product-card.module.css";
 import { TProduct } from "@/types/product.types";
+import classes from "./product-card.module.css";
 
 type TProductCard = {
   product: TProduct;
   isLike: boolean;
+  handleClick: (id: string) => void;
   toggleLike: (event: SyntheticEvent, id: string) => void;
   onDelete: (event: SyntheticEvent, id: string) => void;
   onEdit?: (event: SyntheticEvent, id: string) => void;
@@ -20,13 +21,14 @@ const crop = (str: string, limit: number): string => {
 const ProductCard: FC<TProductCard> = ({
   isLike,
   product,
+  handleClick,
   toggleLike,
   onDelete,
 }) => {
   const { id, image, title, description, category, price } = product;
 
   return (
-    <div className={classes.card}>
+    <div className={classes.card} onClick={() => handleClick(id)}>
       <div className={classes.imageWrapper}>
         <Image
           src={image}
