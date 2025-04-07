@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FC, SyntheticEvent, useEffect } from "react";
 import { deleteProductFromApi } from "@/lib/features/products/products.api";
 import { useDispatch, useSelector } from "@/lib/store";
@@ -24,8 +24,13 @@ const Products: FC<Props> = ({ products }) => {
     (state) => state.productsSlice
   );
 
+  const router = useRouter();
+
+  const handleClickByProduct = (productId: string) => {
+    router.push(`/products/${productId}`);
+  };
+
   const toggleLike = (evt: SyntheticEvent, id: string) => {
-    evt.preventDefault();
     evt.stopPropagation();
     dispatch(toggleFavorite(id));
   };
@@ -36,7 +41,6 @@ const Products: FC<Props> = ({ products }) => {
       return;
     }
 
-    evt.preventDefault();
     evt.stopPropagation();
     try {
       await deleteProductFromApi(id);
@@ -46,19 +50,22 @@ const Products: FC<Props> = ({ products }) => {
     }
   };
 
+  const handleAddProduct = () => {
+    router.push("/products/new");
+  };
+
   const productList = items.map((item) => {
     const isLike = favorites.includes(item.id);
 
     return (
-      <Link href={`/products/${item.id}`} key={item.id}>
-        <ProductCard
-          key={item.id}
-          product={item}
-          isLike={isLike}
-          toggleLike={toggleLike}
-          onDelete={deleteHandler}
-        />
-      </Link>
+      <ProductCard
+        key={item.id}
+        product={item}
+        isLike={isLike}
+        toggleLike={toggleLike}
+        onDelete={deleteHandler}
+        handleClick={handleClickByProduct}
+      />
     );
   });
 
@@ -73,7 +80,12 @@ const Products: FC<Props> = ({ products }) => {
       <div className={classes.header}>
         <h1>Все продукты</h1>
         <Tooltip label="Добавить товар">
-          <ActionIcon variant="outline" size="md" color="blue">
+          <ActionIcon
+            variant="outline"
+            size="md"
+            color="blue"
+            onClick={handleAddProduct}
+          >
             <AddIcon />
           </ActionIcon>
         </Tooltip>
